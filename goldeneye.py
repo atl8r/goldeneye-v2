@@ -25,7 +25,7 @@ except ImportError:
 # Konfiguration
 DEBUG: bool = False
 SSL_VERIFY: bool = True
-BANNER = 'LoadTestEngine Alpha 4.3 - Layer 7'
+BANNER = 'Alpha 4.3 - Layer 7'
 
 # Konstanten (Kontrollierte Werte für legale Tests)
 METHOD_GET = 'get'
@@ -51,8 +51,8 @@ logger = logging.getLogger(__name__)
 console = Console() if RICH_AVAILABLE else None
 
 
-class LoadTestEngine:
-    """Hauptklasse für LoadTestEngine Alpha 4.3"""
+class Alpha:
+    """Hauptklasse für Alpha 4.3"""
 
     def __init__(self, url: str, workers: int = DEFAULT_WORKERS, sockets: int = DEFAULT_SOCKETS,
                  method: str = METHOD_POST, # <--- HIER AUF POST GEÄNDERT
@@ -112,7 +112,7 @@ class LoadTestEngine:
         else:
             avg_latency = max_latency = 0
 
-        table = Table(title=f"Load-Test Stats (Alpha 4.3 - {self.url})", title_style="bold green")
+        table = Table(title=f"{self.url}", title_style="bold green")
         table.add_column("Metrik", style="cyan")
         table.add_column("Wert", style="magenta")
 
@@ -132,7 +132,7 @@ class LoadTestEngine:
             console.print(BANNER, style="bold green")
             console.print(f"Ziel: [cyan]{self.url}[/cyan] | Workers: [magenta]{self.workers}[/magenta] | Sockets/Cycle: [magenta]{self.sockets}[/magenta]", style="bold yellow")
             console.print(f"STANDARD METHODE: [bold red]{self.method.upper()}[/bold red]")
-            console.print("HINWEIS: NUR für legale Load-Tests auf autorisierter Infrastruktur!\n", style="bold red")
+            console.print("HINWEIS: Alpha Version \n", style="bold red")
         else:
              print(f"{BANNER}\nZiel: {self.url} | Workers: {self.workers} | Standard Methode: {self.method.upper()}")
 
@@ -275,7 +275,7 @@ async def run_wrapper():
     
     target_url = args.url
 
-    async with LoadTestEngine(
+    async with Alpha(
         url=target_url,
         workers=args.workers,
         sockets=args.sockets,
